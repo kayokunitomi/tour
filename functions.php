@@ -1,16 +1,14 @@
 <?php
-add_action( 'wp_enqueue_scripts', 'theme_enqueue_styles' );
-function theme_enqueue_styles() {
-    wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-
+function my_setup() {
+  add_theme_support( 'post-thumbnails' ); /* アイキャッチ */
+  add_theme_support( 'automatic-feed-links' ); /* RSSフィード */
+  add_theme_support( 'title-tag' ); /* タイトルタグ自動生成 */
+  add_theme_support( 'html5', array( /* HTML5のタグで出力 */
+    'search-form',
+    'comment-form',
+    'comment-list',
+    'gallery',
+    'caption',
+  ) );
 }
-
-//テーマのセットアップ
-// HTML5でマークアップさせる
-add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list', 'gallery', 'caption' ) );
-// Feedのリンクを自動で生成する
-add_theme_support( 'automatic-feed-links' );
-//アイキャッチ画像を使用する設定
-add_theme_support( 'post-thumbnails' );
-
-?>
+add_action( 'after_setup_theme', 'my_setup' );
